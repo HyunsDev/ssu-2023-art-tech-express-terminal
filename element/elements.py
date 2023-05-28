@@ -14,6 +14,6 @@ class Elements:
 
     def append(self, element):
         self.elements.append(element)
-        
+
     def remove(self, element):
         self.elements.remove(element)

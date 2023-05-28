@@ -20,9 +20,27 @@ class WorkComponent(Element):
         self.color = self.work.color
         self.isFoucs = False
 
-        self.backgroundArea = Area(getX(order), 250, WORK_SIZE, WORK_SIZE)
+        self.backgroundArea = Area(
+            p5Context.width / 2, p5Context.height, WORK_SIZE, WORK_SIZE
+        )
         self.imageArea = Area(
-            getX(order) + 10, 250 + 10, WORK_SIZE - 20, WORK_SIZE - 20
+            p5Context.width / 2 + 10,
+            p5Context.height + 10,
+            WORK_SIZE - 20,
+            WORK_SIZE - 20,
+        )
+
+        self.backgroundArea.transition(
+            (getX(self.order), 250, WORK_SIZE, WORK_SIZE),
+            30,
+            (0, 1, 0, 1),
+            order * 6 + 12,
+        )
+        self.imageArea.transition(
+            (getX(self.order) + 10, 250 + 10, WORK_SIZE - 20, WORK_SIZE - 20),
+            30,
+            (0, 1, 0, 1),
+            order * 6 + 12,
         )
 
         self.addEventListener("mousePressed", self.__mousePressedHandler)
@@ -69,7 +87,7 @@ class WorkComponent(Element):
         self.z_index = 100
 
         backgroundTarget = (0, 0, p5Context.width, p5Context.height)
-        self.backgroundArea.transition(backgroundTarget, 12, (0, 1, 0, 1))
+        self.backgroundArea.transition(backgroundTarget, 18, (0, 1, 0, 1))
 
         imageTarget = (
             p5Context.width / 2 - WORK_SIZE / 2,
@@ -77,7 +95,7 @@ class WorkComponent(Element):
             WORK_SIZE,
             WORK_SIZE,
         )
-        self.imageArea.transition(imageTarget, 10, (0, 1, 0, 1), 2)
+        self.imageArea.transition(imageTarget, 16, (0, 1, 0, 1), 2)
 
         self.x = 0
         self.y = 0
