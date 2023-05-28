@@ -1,19 +1,20 @@
 from p5 import *
-from element.element import Element
+from .animatedText import AnimatedText
+
 from context.p5Context import p5Context
-from context.assetsContext import assetsContext
 
-class TitleComponent(Element):
+
+class TitleComponent(AnimatedText):
     def __init__(self):
-        super().__init__(p5Context.width / 2, 20, 0, 0, 100)
-        pass
-        
-    def draw(self):
-        fill(0, 0, 0)
-        textFont(assetsContext.fonts['NotoSerifKR-Regular'])
-        textSize(20)
-        text('Express Terminal', self.x, self.y)
+        super().__init__(
+            "Express Terminal",
+            p5Context.width / 2,
+            30,
+            color="#000000",
+            size=20,
+            align="CENTER",
+            opacity=0,
+            z_index=100,
+        )
 
-        self.width = textWidth('Express Terminal')
-        self.height = 20
-        self.x = p5Context.width / 2 - self.width / 2
+        self._opacity.transition(255, 12, (0.5, 0.5, 0.5, 0.5), delay=60)

@@ -3,7 +3,7 @@ from works.work1.main import Work1
 from element.window import Window
 
 from context import assetsContext, p5Context
-from components import TitleComponent, Background, WorkComponent
+from components import TitleComponent, Background, WorkComponent, LoadingScreen
 from event import (
     MouseClickedEvent,
     MouseMovedEvent,
@@ -23,17 +23,14 @@ def setup():
     assetsContext.init()
 
     window.elements.append(Background())
-    window.elements.append(TitleComponent())
-    window.elements.append(WorkComponent(Work1(), 0))
-    window.elements.append(WorkComponent(Work1(), 1))
-    window.elements.append(WorkComponent(Work1(), 2))
-    window.elements.append(WorkComponent(Work1(), 3))
+    window.elements.append(LoadingScreen())
 
 
 def draw():
     window.draw()
 
     fill(0)
+    text_align("LEFT")
     text(str(frame_rate), 10, 10)
 
 

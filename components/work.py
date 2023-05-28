@@ -92,8 +92,8 @@ class WorkComponent(Element):
         imageTarget = (
             p5Context.width / 2 - WORK_SIZE / 2,
             p5Context.height / 2 - WORK_SIZE / 2,
-            WORK_SIZE,
-            WORK_SIZE,
+            WORK_SIZE - 20,
+            WORK_SIZE - 20,
         )
         self.imageArea.transition(imageTarget, 16, (0, 1, 0, 1), 2)
 

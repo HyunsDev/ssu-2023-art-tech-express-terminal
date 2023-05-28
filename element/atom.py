@@ -1,4 +1,3 @@
-
 class Atom(object):
     window = None
 
@@ -28,7 +27,7 @@ class Atom(object):
             self.eventListener[type].remove(cb)
 
     def setTimeout(self, cb, delay=1):
-        return self.window.timer.setTimeout(cb, delay)
+        return self.window.windowTimer.setTimeout(cb, delay)
 
     def clearTimeout(self, symbol):
-        return self.window.timer.clearTimeout(symbol)
+        return self.window.windowTimer.clearTimeout(symbol)
