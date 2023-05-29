@@ -71,8 +71,11 @@ class WorkComponent(Element):
     def __mouseOverHandler(self, event):
         if self.isFoucs:
             return
+
         self.backgroundArea.transition(
-            (self.x - 10, self.y - 10, WORK_SIZE + 20, WORK_SIZE + 20), 12, (0, 1, 0, 1)
+            (self.x - 10, self.y - 10, WORK_SIZE + 20, WORK_SIZE + 20),
+            12,
+            (0, 1, 0, 1),
         )
 
     def __mouseOutHandler(self, event):

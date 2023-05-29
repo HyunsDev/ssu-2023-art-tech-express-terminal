@@ -2,8 +2,17 @@ from .atom import Atom
 from p5 import *
 from event import MouseOverEvent, MouseOutEvent
 
+
 class Element(Atom):
-    def __init__(self, x: int = 0, y: int = 0, width: int = 0, height: int = 0, z_index: int = 0, window=None):
+    def __init__(
+        self,
+        x: int = 0,
+        y: int = 0,
+        width: int = 0,
+        height: int = 0,
+        z_index: int = 0,
+        window=None,
+    ):
         super().__init__(window)
         self.x = x
         self.y = y
@@ -13,18 +22,21 @@ class Element(Atom):
 
         self.isMouseOver = False
 
-        self.window.addEventListener('mousePressed', self.__mousePressedHandler)
-        self.window.addEventListener('mouseMoved', self.__mouseMoved)
-    
+        self.window.addEventListener("mousePressed", self.__mousePressedHandler)
+        self.window.addEventListener("mouseMoved", self.__mouseMoved)
+
     def draw(self):
         pass
 
     def getHithox(self):
         return (self.x, self.y, self.width, self.height)
-    
+
     def __isInHitbot(self, x, y):
         hitbox = self.getHithox()
-        return hitbox[0] <= x <= hitbox[0] + hitbox[2] and hitbox[1] <= y <= hitbox[1] + hitbox[3]
+        return (
+            hitbox[0] <= x <= hitbox[0] + hitbox[2]
+            and hitbox[1] <= y <= hitbox[1] + hitbox[3]
+        )
 
     def DEBUG_drawHitbox(self):
         noFill()
@@ -44,5 +56,3 @@ class Element(Atom):
             elif not self.__isInHitbot(event.x, event.y) and self.isMouseOver:
                 self.isMouseOver = False
                 self.dispatchEvent(MouseOutEvent(event, self))
-
-

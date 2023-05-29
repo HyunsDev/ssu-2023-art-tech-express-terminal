@@ -3,10 +3,10 @@ from .animatedValue import AnimatedValue
 
 class Area(object):
     def __init__(self, x, y, width, height):
-        self.x = AnimatedValue(x)
-        self.y = AnimatedValue(y)
-        self.width = AnimatedValue(width)
-        self.height = AnimatedValue(height)
+        self.x = AnimatedValue(x, returnInt=True)
+        self.y = AnimatedValue(y, returnInt=True)
+        self.width = AnimatedValue(width, returnInt=True)
+        self.height = AnimatedValue(height, returnInt=True)
 
     def tick(self):
         self.x.tick()
