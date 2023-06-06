@@ -26,6 +26,10 @@ class Element(Atom):
         self.window.addEventListener("mouseMoved", self.__mouseMoved)
 
     def draw(self):
+        self.tick()
+        pass
+
+    def tick(self):
         pass
 
     def getHithox(self):

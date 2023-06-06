@@ -1,11 +1,25 @@
-from p5 import *
-from element.element import Element
-from context.p5Context import p5Context
+from p5react import *
 
-class Background(Element):
-    def __init__(self):
-        super().__init__(0, 0, p5Context.width, p5Context.height, 0)
-        pass
-        
-    def draw(self):
-        background(255, 255, 255)
+
+class BackgroundComponent(Component):
+    def __init__(self, children=None):
+        super().__init__(0, 0, self.window.width, self.window.height, 0)
+
+    def render(self):
+        return Rect(
+            0,
+            0,
+            self.window.width,
+            self.window.height,
+            "#ffffff",
+            children=[
+                Rect(
+                    50,
+                    50,
+                    50,
+                    50,
+                    "#ff0000",
+                    children=[Rect(25, 25, 50, 50, "#00ff00")],
+                ),
+            ],
+        )

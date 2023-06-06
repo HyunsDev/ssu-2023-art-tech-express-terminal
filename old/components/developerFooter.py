@@ -23,8 +23,7 @@ class FooterComponent(AnimatedText):
         self.addEventListener("mouseOver", self.__mouseOverHandler)
         self.addEventListener("mouseOut", self.__mouseOutHandler)
 
-    def __tick(self):
-        super().__tick()
+    def tick(self):
         self._opacity.tick()
 
     def __mouseOverHandler(self, event):

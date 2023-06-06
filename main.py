@@ -3,7 +3,12 @@ from works.work1.main import Work1
 from element.window import Window
 
 from context import assetsContext, p5Context
-from components import TitleComponent, Background, WorkComponent, LoadingScreen
+from components import (
+    TitleComponent,
+    BackgroundComponent,
+    WorkComponent,
+    LoadingScreen,
+)
 from event import (
     MouseClickedEvent,
     MouseMovedEvent,
@@ -22,7 +27,7 @@ def setup():
     size(p5Context.width, p5Context.height)
     assetsContext.init()
 
-    window.elements.append(Background())
+    window.elements.append(BackgroundComponent())
     window.elements.append(LoadingScreen())
 
 
@@ -43,7 +48,7 @@ def mouse_moved(event):
 
 
 def mouse_pressed(event):
-    window.dispatchEvent(MousePressedEvent(event, window))
+    window.dispatchEvent(MouseReleasedEvent(event, window))
 
 
 def mouse_released(event):

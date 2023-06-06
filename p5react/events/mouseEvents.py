@@ -1,51 +1,73 @@
 from .event import Event
 
+__all__ = (
+    "MouseEvent",
+    "MouseClickedEvent",
+    "MouseMovedEvent",
+    "MouseOverEvent",
+    "MouseOutEvent",
+    "MousePressedEvent",
+    "MouseReleasedEvent",
+    "MouseDraggedEvent",
+    "MouseWheelEvent",
+)
+
+
 class MouseEvent(Event):
     def __init__(self, event, target):
-        self.type = 'mouse'
+        self.type = "mouse"
         self.originalEvent = event
         self.x = event.x
         self.y = event.y
         self.button = event.button
         self.pressed = event.pressed
         self.target = target
+        self.scroll = event.scroll
+
 
 class MouseClickedEvent(MouseEvent):
     def __init__(self, event, target):
         super().__init__(event, target)
-        self.type = 'mouseClicked'
+        self.type = "mouseClicked"
+
 
 class MouseMovedEvent(MouseEvent):
     def __init__(self, event, target):
         super().__init__(event, target)
-        self.type = 'mouseMoved'
+        self.type = "mouseMoved"
+
 
 class MouseOverEvent(MouseEvent):
     def __init__(self, event, target):
         super().__init__(event, target)
-        self.type = 'mouseOver'
+        self.type = "mouseOver"
+
 
 class MouseOutEvent(MouseEvent):
     def __init__(self, event, target):
         super().__init__(event, target)
-        self.type = 'mouseOut'
+        self.type = "mouseOut"
+
 
 class MousePressedEvent(MouseEvent):
     def __init__(self, event, target):
         super().__init__(event, target)
-        self.type = 'mousePressed'
+        self.type = "mousePressed"
+
 
 class MouseReleasedEvent(MouseEvent):
     def __init__(self, event, target):
         super().__init__(event, target)
-        self.type = 'mouseReleased'
+        self.type = "mouseReleased"
+
 
 class MouseDraggedEvent(MouseEvent):
     def __init__(self, event, target):
         super().__init__(event, target)
-        self.type = 'mouseDragged'
+        self.type = "mouseDragged"
+
 
 class MouseWheelEvent(MouseEvent):
     def __init__(self, event, target):
         super().__init__(event, target)
-        self.type = 'mouseWheel'
+        self.type = "mouseWheel"

@@ -18,7 +18,7 @@ class WorkComponent(Element):
         self.work = work
         self.order = order
         self.color = self.work.color
-        self.isFoucs = False
+        self.isFocus = False
 
         self.backgroundArea = Area(
             p5Context.width / 2, p5Context.height, WORK_SIZE, WORK_SIZE
@@ -48,7 +48,7 @@ class WorkComponent(Element):
         self.addEventListener("mouseOut", self.__mouseOutHandler)
 
     def draw(self):
-        self.__tick()
+        super().draw()
 
         # Background
         noStroke()
@@ -58,18 +58,18 @@ class WorkComponent(Element):
         # Image
         image(self.work.image, *self.imageArea.hitbox)
 
-    def __tick(self):
+    def tick(self):
         self.backgroundArea.tick()
         self.imageArea.tick()
 
     def __mousePressedHandler(self, event):
-        if self.isFoucs:
+        if self.isFocus:
             self.__unfocus()
         else:
             self.__focus()
 
     def __mouseOverHandler(self, event):
-        if self.isFoucs:
+        if self.isFocus:
             return
 
         self.backgroundArea.transition(
@@ -79,14 +79,14 @@ class WorkComponent(Element):
         )
 
     def __mouseOutHandler(self, event):
-        if self.isFoucs:
+        if self.isFocus:
             return
         self.backgroundArea.transition(
             (self.x, self.y, WORK_SIZE, WORK_SIZE), 12, (0, 1, 0, 1)
         )
 
     def __focus(self):
-        self.isFoucs = True
+        self.isFocus = True
         self.z_index = 100
 
         backgroundTarget = (0, 0, p5Context.width, p5Context.height)
@@ -106,7 +106,7 @@ class WorkComponent(Element):
         self.height = p5Context.height
 
     def __unfocus(self):
-        self.isFoucs = False
+        self.isFocus = False
         self.z_index = 0
 
         self.backgroundArea.transition(

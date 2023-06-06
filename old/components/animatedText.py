@@ -38,7 +38,7 @@ class AnimatedText(Element):
         return text_width(self.text)
 
     def draw(self):
-        self.__tick()
+        super().draw()
         if self.align == "CENTER":
             self.x = self._x.value - self.getTextWidth() / 2
         else:
@@ -51,7 +51,7 @@ class AnimatedText(Element):
         text_align(self.align)
         text(self.text, self._x.value, self._y.value)
 
-    def __tick(self):
+    def tick(self):
         self._x.tick()
         self._y.tick()
         self._opacity.tick()
