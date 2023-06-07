@@ -1,4 +1,4 @@
-from p5 import text
+import p5
 from ..core.element import Element
 from ..core.value import Value
 
@@ -9,11 +9,16 @@ __all__ = ["Text"]
 class Text(Element):
     name = "text"
 
-    def __init__(self, text, x, y) -> None:
-        super().__init__(x, y)
+    def __init__(self, text, x, y, textStyle=None, style=None) -> None:
+        super().__init__(x, y, style=style)
         self.text = text
-        self.x = Value(x)
-        self.y = Value(y)
+        self.font = textStyle.get("font", "NotoSerifKR-Regular")
+        self.size = textStyle.get("size", 20)
+        self.align = textStyle.get("align", "LEFT")
 
     def draw(self):
-        text(self.text.value, self.x.value, self.y.value)
+        super().draw()
+        p5.text_font(self.window.assets.getFont(self.font))
+        p5.text_size(self.size)
+        p5.text_align(self.align)
+        p5.text(self.text, self.x, self.y)

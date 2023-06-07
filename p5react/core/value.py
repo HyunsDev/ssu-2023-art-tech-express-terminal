@@ -27,25 +27,26 @@ class Value:
         self.__value = __value
         self.time = 0
 
-        self.isPuase = False
-        self.duration = None
+        self.isPlay = True
+        self.duration = 0
         self.timing = None
-        self.deplay = 0
+        self.delay = 0
 
     @property
     def value(self):
         return self.__value
 
     def tick(self):
-        if self.isPuase:
+        if not self.isPlay:
             return
 
-        if self.deplay > 0:
-            self.deplay -= 1
+        if self.delay > 0:
+            self.delay -= 1
             return
 
         self.time += 1
         if self.time >= self.duration:
+            self.isPlay = False
             self.time = self.duration
             self.__value = self.targetValue
         else:
@@ -56,21 +57,21 @@ class Value:
             )
 
     def transition(
-        self, targetValue, duration, timing=CubicBezier(0, 1, 1, 0), deplay=0
+        self, targetValue, duration, timing=CubicBezier(0, 1, 0, 1), delay=0
     ):
+        self.isPlay = True
         self.initValue = self.__value
         self.targetValue = targetValue
         self.duration = duration
-        self.timing = timing
-        self.deplay = deplay
+        self.delay = delay
         self.time = 0
-        self.isPuase = False
         if type(timing) == tuple:
             timing = CubicBezier(*timing)
+        self.timing = timing
 
     def set(self, value):
+        self.isPlay = True
         self.__value = value
         self.initValue = value
         self.targetValue = value
         self.time = 0
-        self.isPuase = False

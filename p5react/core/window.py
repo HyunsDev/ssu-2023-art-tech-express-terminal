@@ -1,6 +1,7 @@
 from .atom import Atom
 from .timer import GlobalTimer
 from ..events import *
+from .assetManager import AssetManager
 import p5
 import __main__
 
@@ -12,21 +13,22 @@ class Window(Atom):
         self.setWindow(self)
         super().__init__()
         self.timer = GlobalTimer()
+        self.assets = AssetManager()
         self.width = width
         self.height = height
         self.title = title
-
         self.rootAtom = None
 
         self.__eventDispatcher()
 
     def setup(self):
+        self.assets.load()
         p5.size(self.width, self.height)
         p5.title(self.title)
 
     def draw(self):
-        # p5.background(255)
-        pass
+        self.timer.tick()
+        self._render()
 
     def render(self):
         return self.rootAtom
@@ -40,7 +42,7 @@ class Window(Atom):
         self.rootAtom = Atom
 
     def run(self):
-        p5.run(frame_rate=60, sketch_draw=self._render, sketch_setup=self.setup)
+        p5.run(frame_rate=60, sketch_draw=self.draw, sketch_setup=self.setup)
 
     def __eventDispatcher(self):
         setattr(
