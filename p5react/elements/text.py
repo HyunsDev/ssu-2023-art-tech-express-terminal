@@ -16,9 +16,10 @@ class Text(Element):
         self.size = textStyle.get("size", 20)
         self.align = textStyle.get("align", "LEFT")
 
-    def draw(self):
-        super().draw()
-        p5.text_font(self.window.assets.getFont(self.font))
-        p5.text_size(self.size)
-        p5.text_align(self.align)
-        p5.text(self.text, self.x, self.y)
+    def draw(self, graphic):
+        graphic = super().draw(graphic)
+        graphic.text_font(self.window.assets.getFont(self.font))
+        graphic.text_size(self.size)
+        graphic.text_align(self.align)
+        graphic.text(self.text, self.x, self.y)
+        return graphic

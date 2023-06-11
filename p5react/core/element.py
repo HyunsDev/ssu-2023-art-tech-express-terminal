@@ -16,14 +16,22 @@ class Element(Atom):
         width=0,
         height=0,
         style=None,
+        eventListeners={
+            "onMouseClick": None,
+            "onMouseEnter": None,
+            "onMouseLeave": None,
+            "oneMousePress": None,
+            "onMouseRelease": None,
+        },
         children=None,
     ):
-        super().__init__(children)
+        super().__init__()
         self.x = x
         self.y = y
         self.width = width
         self.height = height
         self.style = style
+        self.children = children
         self.styleParser()
 
     def styleParser(self):
@@ -35,21 +43,27 @@ class Element(Atom):
         self.strokeWeight = self.style.get("strokeWeight", 0)
         self.noStroke = self.style.get("noStroke", True)
 
-    def _render(self):
-        self.draw()
+    def render(self, graphic=None):
+        if not graphic:
+            graphic = p5.create_graphics(self.window.width, self.window.height)
+
+        graphic = self.draw(graphic)
+
         if self.children:
             for child in self.children:
-                child.draw()
-                child._render()
+                graphic = child.render(graphic)
 
-    def draw(self):
+        return graphic
+
+    def draw(self, graphic):
         fillColor = hexToRGB(self.fill)
-        p5.fill(*fillColor, self.opacity)
+        graphic.fill(*fillColor, self.opacity)
         if self.noStroke:
-            p5.no_stroke()
+            graphic.no_stroke()
         else:
-            p5.stroke_weight(self.strokeWeight)
-            p5.stroke(self.stroke)
+            graphic.stroke_weight(self.strokeWeight)
+            graphic.stroke(self.stroke)
+        return graphic
 
     @property
     def hitbox(self):

@@ -1,71 +1,17 @@
-from p5 import *
-from works.work1.main import Work1
-from element.window import Window
+from p5react import *
+from screen import Router
 
-from context import assetsContext, p5Context
-from components import (
-    TitleComponent,
-    BackgroundComponent,
-    WorkComponent,
-    LoadingScreen,
-)
-from event import (
-    MouseClickedEvent,
-    MouseMovedEvent,
-    MousePressedEvent,
-    MouseReleasedEvent,
-    MouseDraggedEvent,
-    MouseWheelEvent,
-    keyboardEvent,
-    KeyPressedEvent,
-)
+window = Window(1280, 720)
+window.init()
 
-window = Window()
+window.assets.addFont("NotoSerifKR-Regular", "assets/fonts/NotoSerifKR-Regular.otf")
+window.assets.addFont("NotoSansKR-Regular", "assets/fonts/NotoSansKR-Regular.otf")
+window.assets.addFont("NotoSansKR-Bold", "assets/fonts/NotoSansKR-Bold.otf")
+window.assets.addImage("img1.png", "assets/images/img1.png")
+window.assets.addImage("img2.png", "assets/images/img2.png")
+window.assets.addImage("img3.png", "assets/images/img1.png")
+window.assets.addImage("img4.png", "assets/images/img1.png")
 
 
-def setup():
-    size(p5Context.width, p5Context.height)
-    assetsContext.init()
-
-    window.elements.append(BackgroundComponent())
-    window.elements.append(LoadingScreen())
-
-
-def draw():
-    window.draw()
-
-    fill(0)
-    text_align("LEFT")
-    text(str(frame_rate), 10, 10)
-
-
-def mouse_clicked(event):
-    window.dispatchEvent(MouseClickedEvent(event, window))
-
-
-def mouse_moved(event):
-    window.dispatchEvent(MouseMovedEvent(event, window))
-
-
-def mouse_pressed(event):
-    window.dispatchEvent(MouseReleasedEvent(event, window))
-
-
-def mouse_released(event):
-    window.dispatchEvent(MouseReleasedEvent(event, window))
-
-
-def mouse_dragged(event):
-    window.dispatchEvent(MouseDraggedEvent(event, window))
-
-
-def mouse_wheel(event):
-    window.dispatchEvent(MouseWheelEvent(event, window))
-
-
-def key_pressed(event):
-    window.dispatchEvent(KeyPressedEvent(event))
-
-
-if __name__ == "__main__":
-    run(frame_rate=60)
+window.setRoot(Router)
+window.run()

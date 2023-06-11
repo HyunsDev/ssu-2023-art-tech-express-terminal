@@ -1,25 +1,18 @@
-import p5react
+from p5react import *
 
 
-class TitleComponent(p5react.Component):
-    def __init__(self):
-        super().__init__(self.window.width / 2, 50, 0, 0, 30)
+def Title():
+    [opacity, transition] = useValue(["Title"], 0)
 
-        self.o1 = p5react.Value(0)
-        self.o1.transition(255, 12, delay=60)
+    def effect():
+        transition(255, 60, timing=(0, 0, 0, 0), delay=60)
 
-    def tick(self):
-        super().tick()
-        self.o1.tick()
+    useEffect(["Title"], effect, [])
 
-    def render(self):
-        return p5react.Text(
-            "Express Terminal",
-            x=self.x.value,
-            y=self.y.value,
-            textStyle={
-                "size": 20,
-                "font": "NotoSerifKR-Regular",
-            },
-            style={"opacity": self.o1.value, "fill": "#000000"},
-        )
+    return Text(
+        "Express Terminal",
+        1280 / 2,
+        50,
+        textStyle={"size": 20, "align": "CENTER"},
+        style={"fill": "#000000", "opacity": opacity},
+    )

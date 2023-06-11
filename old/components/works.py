@@ -1,7 +1,7 @@
 from p5 import *
 from element.element import Element
 from context.p5Context import p5Context
-from components import WorkComponent
+from components import WorkItem
 from works.work1.main import Work1
 
 
@@ -22,7 +22,7 @@ class WorksComponent(Element):
         self.window.addEventListener("mouseWheel", self.__mouseWheelEventHandler)
 
     def addWork(self, work):
-        workComponent = WorkComponent(work, len(self.works))
+        workComponent = WorkItem(work, len(self.works))
         self.works.append(workComponent)
         self.window.elements.append(workComponent)
 

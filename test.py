@@ -1,32 +1,29 @@
 from p5 import *
+import glfw
 
-pg = None
+
+def preload():
+    from p5.core.p5 import sketch as p5sketch
+
+    def resize():
+        glfw.set_window_size(p5sketch.window, *p5sketch.size)
+        p5sketch.resized = True
+
+    p5sketch.resize = resize
 
 
 def setup():
-    global pg
-    size(710, 400)
-    pg = create_graphics(400, 250)
+    size(500, 500)
 
 
 def draw():
-    background(255)
-
-    fill(0, 12)
-    rect(0, 0, width, height)
+    background(0)
     fill(255)
-    no_stroke()
-    ellipse(mouse_x, mouse_y, 60, 60)
 
-    pg.background(51)
-    pg.no_fill()
-    pg.stroke(255)
-    pg.ellipse(mouse_x - 150, mouse_y - 75, 60, 60)
+    graphic = create_graphics(500, 500)
+    graphic.circle(mouse_x, mouse_y, 50)
 
-    # Draw the offscreen buffer to the screen with image()
-    image(pg, 150, 75)
+    image(graphic, 0, 0)
 
 
-if __name__ == "__main__":
-    # Create Graphics is only available in skia
-    run(renderer="skia")
+run(frame_rate=60, renderer="skia")

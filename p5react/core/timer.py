@@ -26,10 +26,10 @@ class GlobalTimer:
         del self.__timers[symbol]
 
     def tick(self):
+        self.time += 1
         __timers = self.__timers.copy()
         for symbol in __timers:
             timer = __timers[symbol]
             if timer["time"] <= self.time:
-                print(timer["time"])
                 timer["cb"]()
                 del self.__timers[symbol]

@@ -56,6 +56,8 @@ class Value:
                 + self.initValue
             )
 
+        return self.__value
+
     def transition(
         self, targetValue, duration, timing=CubicBezier(0, 1, 0, 1), delay=0
     ):
@@ -68,6 +70,9 @@ class Value:
         if type(timing) == tuple:
             timing = CubicBezier(*timing)
         self.timing = timing
+
+        if duration == 0:
+            self.__value = targetValue
 
     def set(self, value):
         self.isPlay = True

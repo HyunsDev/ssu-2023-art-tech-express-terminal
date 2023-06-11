@@ -32,6 +32,5 @@ class WindowTimer:
         for symbol in __timers:
             timer = __timers[symbol]
             if timer["time"] <= p5Context.frameCount:
-                print(timer["time"])
                 timer["cb"]()
                 del self.__timers[symbol]

@@ -4,20 +4,22 @@ __all__ = ["Atom"]
 class Atom(object):
     window = None
 
-    def __init__(self, children=None):
+    def __init__(self):
         self.eventListener = {}
         self.timer = {}
-        self.children = children
         self.z_index = 0
 
     def setWindow(self, window):
         Atom.window = window
         self.window = Atom.window
 
+    def tick(self):
+        pass
+
     def draw(self):
         pass
 
-    def tick(self):
+    def _draw(self):
         pass
 
     def render(self):
@@ -42,7 +44,7 @@ class Atom(object):
             self.eventListener[type].remove(cb)
 
     def setTimeout(self, cb, delay=1):
-        return self.window.windowTimer.setTimeout(cb, delay)
+        return self.window.timer.setTimeout(cb, delay)
 
     def clearTimeout(self, symbol):
-        return self.window.windowTimer.clearTimeout(symbol)
+        return self.window.timer.clearTimeout(symbol)
