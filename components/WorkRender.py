@@ -20,22 +20,27 @@ def WorkRender(work):
         canvas["current"].setup()
 
         def mousePressed(event):
-            canvas["current"].mouse_pressed(event)
+            canvas["current"].mouse_pressed(event.originalEvent)
 
         def mouseReleased(event):
-            canvas["current"].mouse_released(event)
+            canvas["current"].mouse_released(event.originalEvent)
 
         def mouseDragged(event):
-            canvas["current"].mouse_dragged(event)
+            canvas["current"].mouse_dragged(event.originalEvent)
+
+        def keyPressed(event):
+            canvas["current"].key_pressed(event.originalEvent)
 
         window.addEventListener("mousePressed", mousePressed)
         window.addEventListener("mouseReleased", mouseReleased)
         window.addEventListener("mouseDragged", mouseDragged)
+        window.addEventListener("keyPressed", keyPressed)
 
         def cleanup():
             window.removeEventListener("mousePressed", mousePressed)
             window.removeEventListener("mouseReleased", mouseReleased)
             window.removeEventListener("mouseDragged", mouseDragged)
+            window.removeEventListener("keyPressed", keyPressed)
             canvas["current"].cleanup()
 
         return cleanup

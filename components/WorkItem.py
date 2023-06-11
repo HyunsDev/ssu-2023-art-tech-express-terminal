@@ -113,11 +113,7 @@ def WorkItem(work, order):
 
     useEffect(["work", work.name, "iniit"], effect, [])
 
-    textOpacity = (
-        255 - abs(pos[0] + size[0] / 2 - 1280 / 2)
-        if abs(pos[0] + size[0] / 2 - 1280 / 2) < 256
-        else 0
-    )
+    textOpacity = 280 - abs(pos[0] + size[0] / 2 - 1280 / 2)
 
     children = [
         Text(

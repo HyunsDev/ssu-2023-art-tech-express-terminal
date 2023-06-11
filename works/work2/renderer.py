@@ -8,6 +8,8 @@ import p5
 from p5react import *
 from ..common import Renderer
 
+import builtins
+
 width = 1280
 height = 720
 
@@ -106,7 +108,7 @@ class Work2Renderer(Renderer):
         self.output_details = self.interpreter.get_output_details()
 
         # 웹캠 load
-        self.camera = cv2.VideoCapture(1)
+        self.camera = cv2.VideoCapture(builtins.cameraId)
         self.camera.set(3, 160)  # width
         self.camera.set(4, 120)  # height
 

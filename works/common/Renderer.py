@@ -16,3 +16,6 @@ class Renderer:
 
     def mouse_dragged(self, event):
         pass
+
+    def key_pressed(self, event):
+        pass
