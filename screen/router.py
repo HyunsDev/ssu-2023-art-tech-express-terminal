@@ -9,6 +9,13 @@ def Router():
     [route, setRoute] = useGlobalState(routeState)
     [currentWork, setCurrentWork] = useGlobalState(currentWorkState)
 
+    def effect():
+        [route, setRoute] = useGlobalState(routeState)
+
+        resetHook(["Work"])
+
+    useEffect("router", effect, [route])
+
     ele = Fragment()
     if route == "loading":
         ele = LoadingScreen()

@@ -9,12 +9,13 @@ __all__ = ["Text"]
 class Text(Element):
     name = "text"
 
-    def __init__(self, text, x, y, textStyle=None, style=None) -> None:
+    def __init__(self, text, x, y, textStyle=None, style=None, children=None) -> None:
         super().__init__(x, y, style=style)
         self.text = text
         self.font = textStyle.get("font", "NotoSerifKR-Regular")
         self.size = textStyle.get("size", 20)
         self.align = textStyle.get("align", "LEFT")
+        self.children = children
 
     def draw(self, graphic):
         graphic = super().draw(graphic)

@@ -10,9 +10,17 @@ class Image(Element):
     name = "image"
 
     def __init__(
-        self, img, x, y, width=None, height=None, imageStyle=None, style=None
+        self,
+        img,
+        x,
+        y,
+        width=None,
+        height=None,
+        imageStyle=None,
+        style=None,
+        children=None,
     ) -> None:
-        super().__init__(x, y, width, height, style=style)
+        super().__init__(x, y, width, height, style=style, children=children)
         self.img = img
 
         if (imageStyle) is None:

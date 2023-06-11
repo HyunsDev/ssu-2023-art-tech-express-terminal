@@ -1,6 +1,6 @@
 from p5react import *
 from works import works
-from components import WorkItem, Title
+from components import WorkItem, Title, CloseButton
 from state import worksScrollState, currentWorkState
 
 
@@ -51,6 +51,7 @@ def WorksScreen():
     return Fragment(
         children=[
             Fragment(getWorks(currentWorks)),
+            CloseButton(),
             Title(),
         ]
     )

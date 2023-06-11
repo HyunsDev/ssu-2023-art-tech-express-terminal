@@ -1,10 +1,12 @@
 from p5react import *
 from state import currentWorkState
 from works import works
-from components import WorkLoading, Title
+from components import WorkLoading, Title, WorkRender, CloseButton
 
 
 def WorkScreen():
-    [currentWorks, setCurrentWork] = useGlobalState(currentWorkState)
+    [currentWork, setCurrentWork] = useGlobalState(currentWorkState)
 
-    return Fragment([WorkLoading(currentWorks), Title()])
+    return Fragment(
+        [WorkRender(currentWork), WorkLoading(currentWork), CloseButton(), Title()]
+    )

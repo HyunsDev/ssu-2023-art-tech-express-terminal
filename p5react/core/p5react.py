@@ -35,7 +35,11 @@ def P5React():
 
                 def cleanUp(hook):
                     value = hook.get("__value", None)
-                    if isinstance(value, dict) and "cleanUp" in value:
+                    if (
+                        isinstance(value, dict)
+                        and "cleanUp" in value
+                        and callable(value["cleanUp"])
+                    ):
                         value["cleanUp"]()
 
                     keys = hook.keys()
