@@ -133,13 +133,33 @@ class Work4Renderer(Renderer):
                 self.setuping = False
 
             try:
+
+                def background(color):
+                    self.graphic.background(color)
+
+                def fill(color):
+                    self.graphic.fill(color)
+
+                def circle(x, y, radius):
+                    self.graphic.circle(x, y, radius)
+
+                def rect(x, y, width, height):
+                    self.graphic.rect(x, y, width, height)
+
+                def line(x1, y1, x2, y2):
+                    self.graphic.line(x1, y1, x2, y2)
+
+                def stroke(color):
+                    self.graphic.stroke(color)
+
+                fill(0)
                 exec(self.draw_content)
 
             except Exception as e:
                 exc_type, exc_obj, exc_tb = sys.exc_info()
-                line_number = self.traceback.extract_tb(exc_tb)[-1][1] - 1
+                line_number = traceback.extract_tb(exc_tb)[-1][1] - 1
                 self.graphic.stroke(255, 0, 0)
-                self.graphic.Lines_list[line_number].error = True
+                self.Lines_list[line_number].error = True
 
         return self.graphic
 
@@ -156,22 +176,25 @@ class Work4Renderer(Renderer):
         key = str(event.key)
         if self.editing:
             if key == "F5":
-                FinalCode = ""
+                self.FinalCode = ""
                 for i in self.Lines_list:
                     i.error = False
-                    FinalCode += i.str + "\n"
+                    self.FinalCode += i.str + "\n"
 
-                match = re.search(r"def draw\(\):\n(.*?)\n\n", FinalCode, re.DOTALL)
+                match = re.search(
+                    r"def draw\(\):\n(.*?)\n\n", self.FinalCode, re.DOTALL
+                )
                 if match:
-                    draw_content = match.group(1)
+                    self.draw_content = match.group(1)
                     indented_lines = []
-                    for line in draw_content.split("\n"):
+                    for line in self.draw_content.split("\n"):
                         if line.startswith("    "):
                             indented_lines.append(line.strip())
                         else:
                             break
-                    draw_content = "\n".join(indented_lines)
-                    FinalCode = FinalCode.strip()
+                    self.draw_content = "\n".join(indented_lines)
+                    self.FinalCode = self.FinalCode.strip()
+                    print(self.FinalCode)
                 else:
                     print("draw 함수를 찾을 수 없습니다.")
                 self.editing = False
@@ -197,6 +220,7 @@ class Work4Renderer(Renderer):
                         i.isActive = False
                     self.TargetLine.isActive = True
 
+                elif event.is_shift_down() and key in shift_mapping:
                     self.TargetLine.str += shift_mapping[key]
 
                 elif key in pass_mapping:
@@ -213,7 +237,7 @@ class Work4Renderer(Renderer):
 
                         for i in self.Lines_list:
                             i.isActive = False
-                        self.argetLine.isActive = True
+                        self.TargetLine.isActive = True
 
                 elif key == "SPACE":
                     self.TargetLine.str += " "

@@ -28,14 +28,14 @@ def Title():
         1280 / 2,
         50,
         textStyle={"size": 20, "align": "CENTER"},
-        style={"fill": "#000000", "opacity": opacity},
+        style={"fill": "#868686", "opacity": opacity},
         children=[
             Text(
                 f"{currentWork.name if currentWork != None else ''}",
                 1280 / 2,
                 72,
                 textStyle={"size": 12, "align": "CENTER"},
-                style={"fill": "#000000", "opacity": subTitleOpacity},
+                style={"fill": "#868686", "opacity": subTitleOpacity},
             )
         ],
     )

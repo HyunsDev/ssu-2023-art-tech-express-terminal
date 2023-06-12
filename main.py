@@ -2,7 +2,7 @@ from p5react import *
 from screen import Router
 import builtins
 
-builtins.cameraId = 0
+builtins.cameraId = 1
 
 window = Window(1280, 720)
 window.init()
